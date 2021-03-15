@@ -35,6 +35,14 @@ async function fetchCountries() {
   const res = await fetch('https://restcountries.eu/rest/v2/all');
   const json = await res.json();
 
+  function remove(...toRemove) {
+    toRemove.forEach((item) => {
+      var index = allCountries.findIndex((i) => i.id == item);
+      if (index != -1) {
+        allCountries.splice(index, 1);
+      }
+    });
+  }
   allCountries = json
     .map((country) => {
       const { numericCode, translations, population, flag } = country;
@@ -48,10 +56,22 @@ async function fetchCountries() {
       };
     })
     .filter((country) => {
-      return !!country.id;
+      return !!country.id; // Inclusão extra - filtrando somente países com id válido
     })
-    .sort((a, b) => a.name.localeCompare(b.name)); // Inclusão extra - filtrando somente países com id válido
+    .sort((a, b) => a.name.localeCompare(b.name));
+  const countryToAdd = allCountries.filter(
+    (country) =>
+      country.id === '112' ||
+      country.id === '616' ||
+      country.id === '643' ||
+      country.id === '233' ||
+      country.id === '440' ||
+      country.id === '428'
+  );
 
+  favoriteCountries = [...favoriteCountries, countryToAdd];
+  favoriteCountries = favoriteCountries.flat();
+  remove(...['112', '616', '643', '233', '440', '428']);
   render();
 }
 
