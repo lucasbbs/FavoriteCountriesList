@@ -49,7 +49,8 @@ async function fetchCountries() {
     })
     .filter((country) => {
       return !!country.id;
-    }); // Inclusão extra - filtrando somente países com id válido
+    })
+    .sort((a, b) => a.name.localeCompare(b.name)); // Inclusão extra - filtrando somente países com id válido
 
   render();
 }
