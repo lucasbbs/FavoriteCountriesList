@@ -10,6 +10,11 @@ img {
 
   border-radius: 50%;
 }
+.content-wrapper {
+  margin-left:auto;
+  margin-right:auto;
+  width: fit-content;
+}
 
 .country-container {
   display: flex;
