@@ -45,11 +45,11 @@ async function fetchCountries() {
   }
   allCountries = json
     .map((country) => {
-      const { numericCode, translations, population, flag } = country;
+      const { numericCode, name, population, flag } = country;
 
       return {
         id: numericCode,
-        name: translations.pt,
+        name: name,
         population,
         formattedPopulation: formatNumber(population),
         flag,
